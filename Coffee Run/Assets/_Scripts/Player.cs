@@ -14,13 +14,13 @@ public class Player : MonoBehaviour {
 	void Update() {
 		if (Input.GetKeyDown(KeyCode.UpArrow))
 		{
-			Vector3 position = this.transform.position;
+			Vector2 position = this.transform.position;
 			position.y++;
 			this.transform.position = position * speed;
 		}
 		if (Input.GetKeyDown(KeyCode.DownArrow))
 		{
-			Vector3 position = this.transform.position;
+			Vector2 position = this.transform.position;
 			position.y--;
 			this.transform.position = position * speed;
 		}

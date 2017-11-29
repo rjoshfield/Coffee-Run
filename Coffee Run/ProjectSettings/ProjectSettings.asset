@@ -580,11 +580,12 @@ PlayerSettings:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled:
+    Collab: 1
     UNet: 1
   facebookSdkVersion: 7.9.1
   apiCompatibilityLevel: 2
-  cloudProjectId: e37057b1-785f-4b8c-8693-ce72acf3601a
+  cloudProjectId: 4436ecca-6eba-483e-8013-020b7d406621
   projectName: Coffee Run
-  organizationId: rjoshfield
+  organizationId: slugula
   cloudEnabled: 0
   enableNewInputSystem: 0
