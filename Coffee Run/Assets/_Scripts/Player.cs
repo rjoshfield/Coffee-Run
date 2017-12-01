@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
+	private CharacterController player;
+
 	public float speed;
+	public float gravity;
+	public float jumpForce;
 
 	void Start()
 	{
 		
 	}
 
+	//just for reference
+	//transform.position += transform.up jumpSpeed Time.deltaTime
+		
 	void Update() {
 		if (Input.GetKeyDown(KeyCode.UpArrow))
 		{
