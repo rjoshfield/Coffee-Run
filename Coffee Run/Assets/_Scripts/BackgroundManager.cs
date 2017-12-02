@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelManager : MonoBehaviour {
+public class BackgroundManager : MonoBehaviour {
 	public float groundHorizontalLength;
 	public BoxCollider2D groundCollider;
 
@@ -50,7 +50,7 @@ public class LevelManager : MonoBehaviour {
 
 	private void UpdateBackgroundReference()
 	{
-		
+
 		//Update collider and length
 		groundCollider = currentBackground.GetComponent<BoxCollider2D> ();
 		Debug.Log ("groundCollider is now " + currentBackground.name);
