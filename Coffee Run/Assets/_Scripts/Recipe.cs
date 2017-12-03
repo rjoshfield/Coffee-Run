@@ -4,13 +4,25 @@ using UnityEngine;
 
 public class Recipe : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+	private List<IngUI> recipe;
+	public int recipeSize;
+
+	void Start(){
+
 	}
-	
+
 	// Update is called once per frame
-	void Update () {
-		
+	void Update () 
+	{
+
+	}
+
+	public void newRecipe()
+	{
+		recipe = new List<IngUI> ();
+		for (int i = 0; i < recipeSize; i++) {
+			IngUI ing = new IngUI ();
+			recipe.Add(ing);
+		}
 	}
 }
