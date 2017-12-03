@@ -31,7 +31,9 @@ public class BackgroundManager : MonoBehaviour {
 		if (tempBackground.transform.position.x < -groundHorizontalLength) {
 			Debug.Log ("TRUE");
 			RepositionBackground ();
-		} 
+		}
+
+		makeItem ();
 	}
 
 	private void RepositionBackground()
@@ -66,7 +68,7 @@ public class BackgroundManager : MonoBehaviour {
 
 	}
 
-	public void makeItem()
+	private void makeItem()
 	{
 		GameObject[] eItems;
 
