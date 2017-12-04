@@ -23,9 +23,9 @@ public class Ingredient : MonoBehaviour {
 		iLength = System.Enum.GetNames(typeof(IType)).Length;
 		_eType = (IType)Random.Range(0, iLength);
 		sr = GetComponent<SpriteRenderer>();
-		sprites = Resources.LoadAll<Sprite>("Sprites/Ingredients");
+		sprites = Resources.LoadAll<Sprite>("_Sprites/Ingredients");
 
-		foreach (var s in sprites)
+		foreach (Sprite s in sprites)
 		{
 			if (s.name == EType.ToString())
 			{

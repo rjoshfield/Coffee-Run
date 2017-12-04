@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BackgroundManager : MonoBehaviour {
+public class LevelManager : MonoBehaviour {
 	public float groundHorizontalLength;
 	public BoxCollider2D groundCollider;
 
@@ -19,6 +19,7 @@ public class BackgroundManager : MonoBehaviour {
 
 	void Start(){
 		tempBackground = Instantiate(currentBackground, Vector2.zero, Quaternion.identity);
+		MakeItem ();
 		groundCollider = tempBackground.GetComponent<BoxCollider2D> ();
 		groundHorizontalLength = groundCollider.size.x;
 		items = new List<GameObject> (); // Initialize list for makeItem()
@@ -31,9 +32,7 @@ public class BackgroundManager : MonoBehaviour {
 		if (tempBackground.transform.position.x < -groundHorizontalLength) {
 			Debug.Log ("TRUE");
 			RepositionBackground ();
-		}
-
-		makeItem ();
+		} 
 	}
 
 	private void RepositionBackground()
@@ -53,11 +52,12 @@ public class BackgroundManager : MonoBehaviour {
 
 		//currentBackground.transform.position = (Vector2)transform.position + groundOffset;
 		tempBackground = Instantiate(currentBackground, (Vector2)currentBackground.transform.position, Quaternion.identity);
+		MakeItem ();
 	}
 
 	private void UpdateBackgroundReference()
 	{
-
+		
 		//Update collider and length
 		groundCollider = currentBackground.GetComponent<BoxCollider2D> ();
 		Debug.Log ("groundCollider is now " + currentBackground.name);
@@ -68,9 +68,10 @@ public class BackgroundManager : MonoBehaviour {
 
 	}
 
-	private void makeItem()
+	private void MakeItem()
 	{
 		GameObject[] eItems;
+		GameObject iGO;
 
 		eItems = GameObject.FindGameObjectsWithTag("Item");
 
@@ -80,9 +81,11 @@ public class BackgroundManager : MonoBehaviour {
 		}
 
 		foreach (GameObject item in items) {
-			Instantiate (itemPrefab, item.transform.position, item.transform.rotation);
+			iGO = Instantiate (itemPrefab, item.transform.position, Quaternion.identity);
 			Destroy (item);
-			items.Remove (item);
+			iGO.transform.parent = tempBackground.transform;
 		}
+
+		items.Clear ();
 	}
 }
