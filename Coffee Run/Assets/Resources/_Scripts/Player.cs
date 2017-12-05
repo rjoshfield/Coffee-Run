@@ -22,13 +22,13 @@ public class Player : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.UpArrow))
 		{
 			Vector2 position = this.transform.position;
-			position.y++;
+			position.y += 2;
 			this.transform.position = position * speed;
 		}
 		if (Input.GetKeyDown(KeyCode.DownArrow))
 		{
 			Vector2 position = this.transform.position;
-			position.y--;
+			position.y -= 2;
 			this.transform.position = position * speed;
 		}
 	}
