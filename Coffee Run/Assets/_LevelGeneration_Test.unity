@@ -207,6 +207,8 @@ MonoBehaviour:
     type: 2}
   oldBackground: {fileID: 0}
   tempBackground: {fileID: 0}
+  itemPrefab: {fileID: 1633651684393838, guid: d91b7d8cb8d4aff4e90efd35865f0156, type: 2}
+  items: []
 --- !u!4 &188978951
 Transform:
   m_ObjectHideFlags: 0
@@ -309,7 +311,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &559186273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,8 +332,6 @@ MonoBehaviour:
     type: 2}
   oldBackground: {fileID: 0}
   tempBackground: {fileID: 0}
-  itemPrefab: {fileID: 1431436448445242, guid: d91b7d8cb8d4aff4e90efd35865f0156, type: 2}
-  items: []
 --- !u!4 &559186274
 Transform:
   m_ObjectHideFlags: 0
