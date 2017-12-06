@@ -21,10 +21,8 @@ public class BackgroundManager : MonoBehaviour {
 	}
 
 	void Update () {
-		Debug.Log (tempBackground.transform.position);
 		//Check if
 		if (tempBackground.transform.position.x < -groundHorizontalLength) {
-			Debug.Log ("TRUE");
 			RepositionBackground ();
 		}
 			
@@ -54,7 +52,6 @@ public class BackgroundManager : MonoBehaviour {
 
 		//Update collider and length
 		groundCollider = currentBackground.GetComponent<BoxCollider2D> ();
-		Debug.Log ("groundCollider is now " + currentBackground.name);
 		groundHorizontalLength = groundCollider.size.x;
 
 		//Offset (From MIGOS!) to Instantiate BG

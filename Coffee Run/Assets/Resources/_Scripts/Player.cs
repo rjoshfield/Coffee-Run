@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 
@@ -10,9 +11,11 @@ public class Player : MonoBehaviour {
 	public float gravity;
 	public float jumpForce;
 
+	public Text gameOverText;
+
 	void Start()
 	{
-		
+
 	}
 
 	//just for reference
@@ -30,6 +33,13 @@ public class Player : MonoBehaviour {
 			Vector2 position = this.transform.position;
 			position.y -= 2;
 			this.transform.position = position * speed;
+		}
+
+	}
+
+	void OnColliderEnter(Collider other){
+		if (other.tag == "Obstacle") {
+			gameOverText.text = "Game Over";
 		}
 	}
 }
