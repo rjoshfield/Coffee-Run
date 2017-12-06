@@ -6,7 +6,9 @@ public enum IType
 {
 	Milk,
 	Sweetener,
-	Flavor
+	Flavor,
+	Energy,
+	Special
 }
 
 public class Ingredient : MonoBehaviour {

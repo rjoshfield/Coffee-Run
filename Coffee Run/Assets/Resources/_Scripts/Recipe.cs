@@ -5,16 +5,11 @@ using UnityEngine;
 public class Recipe : MonoBehaviour {
 
 	private List<IngUI> recipe;
-	public int recipeSize;
+	public int recipeSize = 3;
 
-	void Start(){
-
-	}
-
-	// Update is called once per frame
-	void Update () 
+	public Recipe()
 	{
-
+		newRecipe ();
 	}
 
 	public void newRecipe()
@@ -25,4 +20,29 @@ public class Recipe : MonoBehaviour {
 			recipe.Add(ing);
 		}
 	}
+
+	public void Got(IType type)
+	{
+		if (type == IType.Energy) 
+		{
+			//call Egnergy increase
+		} 
+		else 
+		{
+			foreach (var ing in recipe)
+			{
+				if (type == ing.EType)
+				{
+					ing.Acquired = true;
+					break;
+					// Add points 
+				} 
+				else
+				{
+					continue;
+				}
+			}
+		}
+	}
+
 }
