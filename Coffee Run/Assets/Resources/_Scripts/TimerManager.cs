@@ -9,8 +9,12 @@ public class TimerManager : MonoBehaviour {
 	public float timeAmt = 100;
 	public float time;
 	public Text timeText;
+	public GameObject GameOverPanel;
+	public Text gameOverText;
 
 	void Start () {
+		GameOverPanel.SetActive (false);
+		Time.timeScale = 1;
 		timerBar = timerBar.GetComponent<Image> ();
 		timeText = timeText.GetComponent<Text> ();
 		time = timeAmt;
@@ -21,6 +25,12 @@ public class TimerManager : MonoBehaviour {
 			time -= Time.deltaTime;
 			timerBar.fillAmount = time / timeAmt;
 			timeText.text = time.ToString ("N0");
+		}
+
+		if (time < 0) {
+			GameOverPanel.SetActive (true);
+			gameOverText.text = "Game Over";
+			Time.timeScale = 0;
 		}
 	}
 }

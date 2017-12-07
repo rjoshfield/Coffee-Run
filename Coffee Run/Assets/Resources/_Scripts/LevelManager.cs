@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour {
 	public float groundHorizontalLength;
@@ -70,5 +71,11 @@ public class LevelManager : MonoBehaviour {
 		}
 
 		items.Clear ();
+	}
+
+
+
+	public void RestartLevel(){
+		SceneManager.LoadScene ("_LevelGeneration_Test");
 	}
 }
