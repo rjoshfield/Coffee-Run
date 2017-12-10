@@ -13,9 +13,12 @@ public class Player : MonoBehaviour {
 
 	public Text gameOverText;
 
+	public Recipe rec;
+	public Ingredient ing;
+
 	void Start()
 	{
-
+		rec = GameObject.Find ("MainCamera").GetComponent<Recipe> ();
 	}
 
 	//just for reference
@@ -40,6 +43,14 @@ public class Player : MonoBehaviour {
 	void OnColliderEnter(Collider other){
 		if (other.tag == "Obstacle") {
 			gameOverText.text = "Game Over";
+		}
+	}
+
+	public void OnTriggerEnter (Collider other){
+		if (other.tag == "Ing") {
+			ing = other.gameObject.GetComponent<Ingredient>();
+			rec.Got (ing.EType);
+			Destroy (other.gameObject);
 		}
 	}
 }

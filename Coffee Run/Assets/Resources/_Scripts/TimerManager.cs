@@ -12,6 +12,8 @@ public class TimerManager : MonoBehaviour {
 	public GameObject GameOverPanel;
 	public Text gameOverText;
 
+	public int energyBonus = 5;
+
 	void Start () {
 		GameOverPanel.SetActive (false);
 		Time.timeScale = 1;
@@ -32,5 +34,9 @@ public class TimerManager : MonoBehaviour {
 			gameOverText.text = "Game Over";
 			Time.timeScale = 0;
 		}
+	}
+
+	public void AddTime(){
+		time += energyBonus;
 	}
 }
