@@ -11,5 +11,17 @@ public class IngUI : Ingredient
 		get { return _acquired; }
 		set { _acquired = value; }
 	}
+
+	public void Randomize(){
+		_eType = (IType)Random.Range (0, iLength);
+		sr = GetComponent<SpriteRenderer> ();
+		sprites = Resources.LoadAll<Sprite> ("_Sprites/Ingredients");
+
+		foreach (Sprite s in sprites) {
+			if (s.name == EType.ToString ()) {
+				sr.sprite = s;
+			}
+		}
+	}
 }
 
