@@ -18,7 +18,7 @@ public class Player : MonoBehaviour {
 
 	void Start()
 	{
-		rec = GameObject.Find ("MainCamera").GetComponent<Recipe> ();
+		rec = GameObject.Find ("Main Camera").GetComponent<Recipe> ();
 	}
 
 	//just for reference

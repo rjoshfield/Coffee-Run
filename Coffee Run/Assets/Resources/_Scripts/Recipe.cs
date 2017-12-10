@@ -17,6 +17,8 @@ public class Recipe : MonoBehaviour {
 	{
 		recipe = new List<GameObject> {i1, i2, i3};
 		timer = GameObject.Find ("GameManager").GetComponent<TimerManager> ();
+		foreach (GameObject ing in recipe)
+			Debug.Log (ing.GetComponent<IngUI> ().EType.ToString ());
 	}
 
 	public void Update(){
@@ -42,7 +44,7 @@ public class Recipe : MonoBehaviour {
 			for (int i=0; i < recipe.Count; i++)
 			{
 
-				if (type == recipe[i].GetComponent<IngUI>().EType)
+				if (type.Equals(recipe[i].GetComponent<IngUI>().EType))
 				{
 					recipe[i].GetComponent<IngUI>().Acquired = true;
 					break;

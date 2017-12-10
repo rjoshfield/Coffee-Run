@@ -13,14 +13,12 @@ public enum IType
 
 public class Ingredient : MonoBehaviour {
 
+	private int iLength;
+	private IType _eType;
+	private SpriteRenderer sr;
+	private Sprite[] sprites;
 
-
-	protected int iLength;
-	protected IType _eType;
-	protected SpriteRenderer sr;
-	protected Sprite[] sprites;
-
-	void Awake()
+	public void Awake()
 	{
 		iLength = System.Enum.GetNames(typeof(IType)).Length;
 		_eType = (IType)Random.Range(0, iLength);
