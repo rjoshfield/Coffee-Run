@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Recipe : MonoBehaviour {
 
@@ -13,12 +14,13 @@ public class Recipe : MonoBehaviour {
 	public GameObject i2;
 	public GameObject i3;
 
+	public ScoreManager sc;
+
 	public void Start ()
 	{
 		recipe = new List<GameObject> {i1, i2, i3};
 		timer = GameObject.Find ("GameManager").GetComponent<TimerManager> ();
-		foreach (GameObject ing in recipe)
-			Debug.Log (ing.GetComponent<IngUI> ().EType.ToString ());
+		sc = GameObject.Find ("Score").GetComponent<ScoreManager> ();			
 	}
 
 	public void Update(){
@@ -47,8 +49,10 @@ public class Recipe : MonoBehaviour {
 				if (type.Equals(recipe[i].GetComponent<IngUI>().EType))
 				{
 					recipe[i].GetComponent<IngUI>().Acquired = true;
+					sc.AddPoints (5);
+					recipe [i].GetComponent<SpriteRenderer> ().sprite = Resources.Load ("check") as Sprite;
 					break;
-					// Add points 
+
 				} 
 				else
 				{					

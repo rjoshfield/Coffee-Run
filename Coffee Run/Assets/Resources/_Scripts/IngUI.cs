@@ -24,20 +24,13 @@ public class IngUI : MonoBehaviour
 	{
 		m_Image = GetComponent<Image> ();
 		iLength = System.Enum.GetNames(typeof(IType)).Length;
-		_eType = (IType)Random.Range(0, iLength);
-		sprites = Resources.LoadAll<Sprite>("_Sprites/Ingredients");
-
-		foreach (Sprite s in sprites)
-		{
-			if (s.name == EType.ToString())
-			{
-				m_Image.sprite = s;
-			}
-		}
+		Randomize ();
 	}
 
 	public void Randomize(){
 		_eType = (IType)Random.Range (0, iLength);
+		if (EType == IType.Energy)
+			Randomize ();
 		sprites = Resources.LoadAll<Sprite> ("_Sprites/Ingredients");
 
 		foreach (Sprite s in sprites) {
