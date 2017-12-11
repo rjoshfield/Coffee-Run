@@ -5,15 +5,18 @@ using UnityEngine;
 public class PlayerHitbox : MonoBehaviour {
 
     public Player player;
+    public CoffeeManager cm;
 
-	// Use this for initialization
-	void Start () {
+        // Use this for initialization
+    void Start ()
+    {
         if (player == null)
             player = GameObject.Find("Player").GetComponent<Player>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        cm = GameObject.Find("Main Camera").GetComponent<CoffeeManager>();
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 
@@ -26,10 +29,13 @@ public class PlayerHitbox : MonoBehaviour {
             player.rec.Got(player.ing.EType);
             Destroy(other.gameObject);
         }
+        
         if (other.tag == "Obstacle")
         {
-            player.gameOverPanel.SetActive(true);
-            player.gameOverText.text = "Game Over";
+            cm.ResetCoffees();
+            //player.gameOverPanel.SetActive(true);
+            //player.gameOverText.text = "Game Over";
         }
+        
     }
 }

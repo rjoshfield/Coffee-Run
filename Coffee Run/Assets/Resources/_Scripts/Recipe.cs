@@ -15,25 +15,38 @@ public class Recipe : MonoBehaviour {
 	public GameObject i3;
 
 	public ScoreManager sc;
+    public CoffeeManager cm;
 
-	public void Start ()
+    public Sprite checkSprite;
+
+
+    public void Start ()
 	{
 		recipe = new List<GameObject> {i1, i2, i3};
 		timer = GameObject.Find ("GameManager").GetComponent<TimerManager> ();
-		sc = GameObject.Find ("Score").GetComponent<ScoreManager> ();			
-	}
+		sc = GameObject.Find ("Score").GetComponent<ScoreManager> ();
+        cm = GameObject.Find("Main Camera").GetComponent<CoffeeManager>();
 
-	public void Update(){
-		if (recipe [0].GetComponent<IngUI> ().Acquired == true && recipe [1].GetComponent<IngUI> ().Acquired == true && recipe [2].GetComponent<IngUI> ().Acquired == true)
-			newRecipe ();
+    }
+
+    public void Update(){
+        if (recipe[0].GetComponent<IngUI>().Acquired == true && recipe[1].GetComponent<IngUI>().Acquired == true && recipe[2].GetComponent<IngUI>().Acquired == true)
+        {
+            newRecipe();
+            cm.AddCoffee();
+            sc.AddPoints(10);
+        }
 	}
 
 	public void newRecipe()
 	{
-		foreach (GameObject ing in recipe) {
-			ing.GetComponent<IngUI> ().Randomize ();
-		}
-	}
+
+        foreach (GameObject ing in recipe)
+        {
+            ing.GetComponent<IngUI>().Randomize();
+            ing.GetComponent<IngUI>().Acquired = false;
+        }
+    }
 
 	public void Got(IType type)
 	{
@@ -46,16 +59,18 @@ public class Recipe : MonoBehaviour {
 			for (int i=0; i < recipe.Count; i++)
 			{
 
-				if (type.Equals(recipe[i].GetComponent<IngUI>().EType))
+				if (type.Equals(recipe[i].GetComponent<IngUI>().EType) && !recipe[i].GetComponent<IngUI>().Acquired)
 				{
 					recipe[i].GetComponent<IngUI>().Acquired = true;
 					sc.AddPoints (5);
-					recipe [i].GetComponent<SpriteRenderer> ().sprite = Resources.Load ("check") as Sprite;
+                    recipe[i].GetComponent<Image>().sprite = checkSprite;
+                    //recipe[i].GetComponent<Image>().sprite = Resources.Load ("_Sprites/check") as Sprite;
 					break;
-
 				} 
 				else
-				{					
+				{
+                    if (i == recipe.Count - 1)
+                        newRecipe();
 					continue;
 				}
 			}

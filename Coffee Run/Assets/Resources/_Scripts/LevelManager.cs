@@ -18,8 +18,10 @@ public class LevelManager : MonoBehaviour {
 
 	void Start(){
 		backgrounds = Resources.LoadAll<GameObject>("_BackgroundPrefabs");
-		tempBackground = Instantiate (backgrounds [Random.Range (0, backgrounds.Length)], Vector2.zero, Quaternion.identity);
-		MakeItem ();
+        //tempBackground = Instantiate (backgrounds [Random.Range (0, backgrounds.Length)], Vector2.zero, Quaternion.identity);
+        tempBackground = Instantiate (tempBackground, Vector2.zero, Quaternion.identity);
+
+        MakeItem();
 
 		groundCollider = tempBackground.GetComponent<BoxCollider2D> ();
 		groundHorizontalLength = groundCollider.size.x;
@@ -41,7 +43,7 @@ public class LevelManager : MonoBehaviour {
 		//Update Colliders & etc.
 		UpdateBackgroundReference ();
 
-		tempBackground = Instantiate(tempBackground, (Vector2)tempBackground.transform.position, Quaternion.identity);
+		tempBackground = Instantiate(tempBackground, new Vector2 (tempBackground.transform.position.x + 5, tempBackground.transform.position.y), Quaternion.identity);
 		MakeItem ();
 	}
 
@@ -76,6 +78,8 @@ public class LevelManager : MonoBehaviour {
 
 
 	public void RestartLevel(){
-		SceneManager.LoadScene ("_LevelGeneration_Test");
-	}
+		SceneManager.LoadScene (SceneManager.GetActiveScene().name);
+        //SceneManager.LoadScene(LevelManager.);
+
+    }
 }

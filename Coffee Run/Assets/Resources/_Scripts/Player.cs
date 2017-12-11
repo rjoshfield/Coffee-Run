@@ -13,6 +13,8 @@ public class Player : MonoBehaviour {
     //public float buttonDelayTimer = 1.0f;
     public Rigidbody playerRB;
 
+    private Vector3 defaultPosition;
+
     public enum playerState {Default, Jumping, Diving, Sliding}
     public playerState currentState;
 
@@ -20,6 +22,9 @@ public class Player : MonoBehaviour {
     public GameObject currentStateObj;
 
     public float holdStateTime = .6f;
+    private Coroutine currentCoroutine;
+    private Coroutine prevCoroutine;
+
 
     //private bool playerInput = false;// 
     /*
@@ -75,7 +80,11 @@ public class Player : MonoBehaviour {
         }
 
         currentStateObj = playerStateObjs[0];
+
+        defaultPosition = transform.position;
+
     }
+
 
     //just for reference
     //transform.position += transform.up jumpSpeed Time.deltaTime
@@ -162,7 +171,10 @@ void Update() {
             grounded = true;
             if (currentState == playerState.Jumping)
             {
-                StartCoroutine(ChangeState(playerState.Default, .2f));
+                currentState = playerState.Default;
+                if (currentCoroutine != null)
+                    StopCoroutine(currentCoroutine);
+                currentCoroutine = StartCoroutine(ChangeState(playerState.Default, .1f));
             }
             //Debug.Log("Speed: " + playerRB.velocity);
         }
@@ -208,24 +220,30 @@ void Update() {
 
             playerRB.velocity = (new Vector3(0, jumpForce));
             //transform.position = new Vector3(transform.position.x, transform.position.y + .1f, transform.position.z);
-            StartCoroutine(ChangeState(playerState.Jumping, 0));
+            if (currentCoroutine != null)
+                StopCoroutine(currentCoroutine);
+            currentCoroutine = StartCoroutine(ChangeState(playerState.Jumping, 0));
             //Debug.Log("Speed: " + playerRB.velocity);
         }
 
         else if ((Input.GetKeyDown(KeyCode.DownArrow)) == true && grounded && currentState != playerState.Sliding)
         {
             playerRB.useGravity = false;
-
-            StartCoroutine(HoldState(playerState.Sliding));
+            if (currentCoroutine != null)
+                StopCoroutine(currentCoroutine);
+            currentCoroutine = StartCoroutine(HoldState(playerState.Sliding));
 
             //Debug.Log("Speed: " + playerRB.velocity);
         }
 
-        else if ((Input.GetKeyDown(KeyCode.RightArrow)) == true && grounded && currentState != playerState.Diving)
+        else if ((Input.GetKeyDown(KeyCode.RightArrow)) == true && currentState != playerState.Diving)
         {
             playerRB.useGravity = false;
-
-            StartCoroutine(HoldState(playerState.Diving));
+            playerRB.velocity = Vector3.zero;
+            transform.position = defaultPosition;
+            if (currentCoroutine != null)
+                StopCoroutine(currentCoroutine);
+            currentCoroutine = StartCoroutine(HoldState(playerState.Diving));
 
             //Debug.Log("Speed: " + playerRB.velocity);
         }
@@ -258,7 +276,6 @@ void Update() {
 
         print("current state:" + currentState);
 
-
         //currentStateObj.SetActive(false);
         //currentState = playerState.Default;
 
@@ -290,10 +307,12 @@ void Update() {
 
     void OnColliderEnter(Collider other)
     {
+        /*
 		if (other.tag == "Obstacle")
         {
 			gameOverText.text = "Game Over";
 		}
+        */
 	}
 
     public void OnTriggerEnter(Collider other)
